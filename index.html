@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        *{
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        #table {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #table td {
+            border: 1px solid #ddd;
+            padding: 10px 8px;
+        }
+    </style>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Corn Yield Calculator</h2>
+    <form action id="Calc" method="post" name="Calc" language="javascript">
+        <table id="table" border="1" cellpadding="0" cellspacing="0">
+            <tr>
+                <td align="right">Select Your Row Width:</td>
+                <td align="left">
+                    <select id="RowWidth" name="RowWidth" onchange="update1(this.selectedIndex)" size="1"
+                        style="padding:2px;">
+                        <option value="20">20&quot; Rows </option>
+                        <option value="28">28&quot; Rows </option>
+                        <option selected value="30">30&quot; Rows </option>
+                        <option value="32">32&quot; Rows </option>
+                        <option value="36">36&quot; Rows </option>
+                        <option value="38">38&quot; Rows </option>
+                        <option value="40">40&quot; Rows </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    Count the Number of Ears in <input id="text4" name="text4" readOnly value="17 Feet, 5 Inches"
+                        style="padding: 2px; color: #333333; font-family: 'Droid Sans',Arial,Verdana,sans-serif; font-size: 13px; width:103px;">of
+                    Row:
+                </td>
+                <td align="left">
+                    <input id="text1" aria-label="output" name="text1" size="3" style="border: 1px solid #999; width: 76px; padding: 2px;">
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <sup>*</sup>Count the Number of Kernel Rows per Ear:
+                </td>
+                <td align="left">
+                    <input id="text2" aria-label="output" name="text2" size="4" onblur="GetKernels();"
+                        style="border: 1px solid #999; width: 76px; padding: 2px;">
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <sup>*</sup>Count the Number of Kernels per Row:
+                </td>
+                <td align="left">
+                    <input id="text3" aria-label="output" name="text3" size="4" onblur="GetKernels();"
+                        style="border: 1px solid #999; width: 76px; padding: 2px;">
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <sup>*</sup>Count the Number of Kernels per Ear:
+                </td>
+                <td align="left">
+                    <input id="text5" aria-label="output" name="text5" size="4" onfocus="GetKernels();"
+                        style="border: 1px solid #999; width: 76px; padding: 2px;">
+                </td>
+            </tr>
+            <tr>
+                <td align="center" colspan="2">
+                    <input id="CalcBtn" name="CalcBtn" aria-label="output" type="button" value="CLICK HERE to Calculate Corn Yield"
+                        onclick="GoCalc();">
+                </td>
+            </tr>
+            <tr>
+                <td align="right" style="font-weight:bold;">
+                    Your Estimated Corn Yield:
+                </td>
+                <td align="left" style="font-weight:bold;">
+                    <input id="text6" aria-label="output" name="text6" size="5" readOnly
+                        style="border: 1px solid #999; width:76px; padding: 2px;">&nbsp; Bushels per Acre
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <script ID="clientEventHandlersJS" LANGUAGE="javascript">
+        
+        
+        function GetKernels() {
+            if (document.Calc.text2.value > "" && document.Calc.text3.value > "") {
+                var myResults = 0;
+                myResults = (document.Calc.text2.value * document.Calc.text3.value);
+                myResults *= 10;
+                myResults = Math.round(myResults);
+                myResults /= 10;
+                document.Calc.text5.value = myResults; }
+        }
+        
+        function GoCalc() {
+        
+            if (document.Calc.text1.value == "") {
+                alert("Must enter the number of Ears in 1/1000th of an acre");
+                document.Calc.text1.focus();
+            }
+            else if (document.Calc.text5.value == "") {
+                alert("Must enter the number of Kernels per Ear");
+                document.Calc.text5.focus();
+            }
+            else {
+                var myResults = 0;
+                myResults = (document.Calc.text1.value * document.Calc.text5.value) / 90;
+                myResults *= 10;
+                myResults = Math.round(myResults);
+                myResults /= 10;
+                document.Calc.text6.value = myResults; }
+        }
+        
+        function update1(ivalue) {
+        	
+            if (ivalue == 0) {
+                document.Calc.text4.value="26 Feet, 1 Inch";}
+        
+            else if (ivalue == 1) {
+                document.Calc.text4.value="18 Feet, 8 Inches";}
+        	
+            else if (ivalue == 2) {
+                document.Calc.text4.value="17 Feet, 5 Inches";}
+        	
+            else if (ivalue == 3) {
+                document.Calc.text4.value="16 Feet, 4 Inches";}
+        	
+            else if (ivalue == 4) {
+                document.Calc.text4.value="14 Feet, 6 Inches";}
+        	
+            else if (ivalue == 5) {
+                document.Calc.text4.value="13 Feet, 9 Inches";}
+        
+            else if (ivalue == 6) {
+                document.Calc.text4.value="13 Feet, 1 Inch";} 
+        }
+        
+        
+    </script>
+
+</body>
+
+</html>
